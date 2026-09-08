@@ -226,55 +226,79 @@ export const LocationContact: React.FC<LocationContactProps> = ({ settings }) =>
         </div>
 
         {/* Quick Additional Bar: Instagram & Free Pick-Up Service */}
-        <div className="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="mt-14 max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
           <SpotlightCard
-            spotlightColor="rgba(244, 63, 94, 0.15)"
-            className="p-5 rounded-2xl bg-slate-900/80 border border-slate-800 flex items-center justify-between"
+            spotlightColor="rgba(244, 63, 94, 0.18)"
+            className="p-6 sm:p-7 rounded-3xl bg-[#0a1224]/90 border border-slate-800 hover:border-rose-500/40 shadow-xl transition-all duration-300"
+            innerClassName="flex flex-col justify-between h-full space-y-6"
           >
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-rose-500/15 border border-rose-500/30 flex items-center justify-center text-rose-400">
-                <Instagram className="w-5 h-5" />
+            <div className="space-y-4">
+              <div className="flex items-center justify-between">
+                <div className="w-12 h-12 rounded-2xl bg-rose-500/15 border border-rose-500/30 flex items-center justify-center text-rose-400">
+                  <Instagram className="w-6 h-6" />
+                </div>
+                <span className="text-[10px] font-mono px-3 py-1 rounded-full bg-slate-800 text-slate-400 border border-slate-700">
+                  OFFICIAL SOSMED
+                </span>
               </div>
+
               <div>
-                <div className="text-xs font-bold text-white">Instagram Resmi</div>
-                <div className="text-xs font-mono text-blue-400">{settings.instagram}</div>
+                <h3 className="text-lg sm:text-xl font-bold text-white">Instagram Resmi</h3>
+                <p className="text-xs text-slate-300 font-sans mt-1 leading-relaxed">
+                  Ikuti kami di Instagram untuk melihat dokumentasi video cuci sepatu, tips perawatan sneaker harian, dan info diskon terbaru.
+                </p>
+                <div className="text-sm font-mono font-bold text-blue-400 pt-2">{settings.instagram}</div>
               </div>
             </div>
+
             <a
               href={`https://instagram.com/${settings.instagram.replace('@', '')}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-3.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white text-xs font-mono font-semibold border border-slate-700 flex items-center gap-1 transition-colors"
+              className="w-full py-3 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-white text-xs font-mono font-bold border border-slate-700 hover:border-slate-600 flex items-center justify-center gap-2 transition-all shadow-md cursor-pointer hover:scale-[1.01]"
             >
-              <span>Follow</span>
-              <ExternalLink className="w-3 h-3" />
+              <span>Follow Instagram Shoelabers</span>
+              <ExternalLink className="w-3.5 h-3.5" />
             </a>
           </SpotlightCard>
 
           <SpotlightCard
-            spotlightColor="rgba(16, 185, 129, 0.2)"
-            className="p-5 rounded-2xl bg-slate-900/80 border border-slate-800 flex items-center justify-between"
+            spotlightColor="rgba(16, 185, 129, 0.25)"
+            className="p-6 sm:p-7 rounded-3xl bg-[#0a1224]/90 border border-slate-800 hover:border-emerald-500/40 shadow-xl transition-all duration-300"
+            innerClassName="flex flex-col justify-between h-full space-y-6"
           >
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
-                <Truck className="w-5 h-5" />
+            <div className="space-y-4">
+              <div className="flex items-center justify-between">
+                <div className="w-12 h-12 rounded-2xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
+                  <Truck className="w-6 h-6 animate-pulse" />
+                </div>
+                <span className="text-[10px] font-mono px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-bold">
+                  ★ GRATIS ONGKIR
+                </span>
               </div>
+
               <div>
-                <div className="text-xs font-bold text-white">Layanan Free Pick-Up</div>
-                <div className="text-[11px] text-emerald-400 font-mono">Antar-Jemput Gratis (S&K)</div>
+                <h3 className="text-lg sm:text-xl font-bold text-white">Layanan Free Pick-Up & Delivery</h3>
+                <p className="text-xs text-slate-300 font-sans mt-1 leading-relaxed">
+                  Tidak sempat antar sepatu ke toko? Teknisi kami siap jemput dan antar kembali sepatu Anda sampai ke depan pintu rumah Anda di Surabaya & Gresik.
+                </p>
+                <div className="text-xs font-mono text-emerald-400 font-bold pt-2">
+                  🟢 Antar-Jemput Gratis (Syarat & Ketentuan Berlaku)
+                </div>
               </div>
             </div>
+
             <a
               href={getWhatsAppLink(
                 settings.storePhone,
-                'Halo Shoelabers! Saya ingin request layanan Free Pick-Up & Delivery untuk cuci sepatu saya.'
+                'Halo Shoelabers! Saya ingin request layanan Free Pick-Up & Delivery untuk cuci sepatu saya ke alamat saya.'
               )}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-3.5 py-1.5 rounded-lg bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 hover:text-white text-xs font-mono font-bold border border-emerald-500/30 flex items-center gap-1.5 transition-all shadow-sm"
+              className="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white text-xs font-bold flex items-center justify-center gap-2 shadow-lg shadow-emerald-600/30 transition-all cursor-pointer hover:scale-[1.01]"
             >
-              <MessageCircle className="w-3.5 h-3.5 text-emerald-400" />
-              <span>Request Pick-Up</span>
+              <MessageCircle className="w-4 h-4 text-white flex-shrink-0" />
+              <span>Chat Kasir Request Free Pick-Up</span>
             </a>
           </SpotlightCard>
         </div>

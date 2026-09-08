@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Sparkles, Check, Clock, MessageCircle, MapPin, Truck } from 'lucide-react';
+import { Sparkles, Check, Clock, MessageCircle, MapPin, Truck, AlertCircle } from 'lucide-react';
 import { ServicePackage, StoreSettings } from '../types';
 import { fetchServicePackages, formatRupiah, getWhatsAppLink } from '../services/supabase';
 
@@ -36,7 +36,7 @@ export const ServicesPricing: React.FC<ServicesPricingProps> = ({ settings }) =>
     { key: 'all', label: 'Semua Layanan' },
     { key: 'cleaning', label: 'Pembersihan (Cleaning)' },
     { key: 'treatment', label: 'Treatment Khusus' },
-    { key: 'repair', label: 'Restorasi & Repair' },
+    { key: 'repair', label: 'Restorasi & Repair (Belum Tersedia)' },
   ];
 
   const filtered = activeCategory === 'all'
@@ -107,6 +107,17 @@ export const ServicesPricing: React.FC<ServicesPricingProps> = ({ settings }) =>
           ))}
         </div>
 
+        {/* Notice for Restorasi & Repair */}
+        {activeCategory === 'repair' && (
+          <div className="max-w-3xl mx-auto mb-8 p-4 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-amber-200 text-xs flex items-center gap-3 shadow-lg">
+            <AlertCircle className="w-5 h-5 text-amber-400 flex-shrink-0" />
+            <div className="leading-relaxed">
+              <strong className="text-amber-300">Pemberitahuan Layanan: </strong>
+              Mohon maaf, saat ini kami belum menyediakan restorasi dan repair. Layanan ini sedang dalam tahap persiapan dan pengembangan.
+            </div>
+          </div>
+        )}
+
         {/* Pricing Cards Grid with React Bits SpotlightCard & ShinyText */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pt-5 items-stretch">
           {filtered.map((pkg) => (
@@ -131,9 +142,15 @@ export const ServicesPricing: React.FC<ServicesPricingProps> = ({ settings }) =>
               <div className="space-y-4 flex-1 flex flex-col">
                 {/* Category & Duration Header */}
                 <div className="flex items-center justify-between gap-2">
-                  <span className="text-[10px] font-mono uppercase text-blue-400 font-bold tracking-wider px-2.5 py-0.5 rounded-md bg-blue-500/10 border border-blue-500/30">
-                    {pkg.category}
-                  </span>
+                  {pkg.category === 'repair' ? (
+                    <span className="text-[10px] font-mono uppercase text-amber-400 font-bold tracking-wider px-2.5 py-0.5 rounded-md bg-amber-500/15 border border-amber-500/30">
+                      BELUM TERSEDIA
+                    </span>
+                  ) : (
+                    <span className="text-[10px] font-mono uppercase text-blue-400 font-bold tracking-wider px-2.5 py-0.5 rounded-md bg-blue-500/10 border border-blue-500/30">
+                      {pkg.category}
+                    </span>
+                  )}
                   <div className="flex items-center gap-1.5 text-[11px] font-mono text-slate-400 bg-slate-800/80 px-2.5 py-1 rounded-md border border-slate-700/60 flex-shrink-0">
                     <Clock className="w-3.5 h-3.5 text-blue-400" />
                     <span>{pkg.duration}</span>
@@ -146,17 +163,35 @@ export const ServicesPricing: React.FC<ServicesPricingProps> = ({ settings }) =>
                 </div>
 
                 {/* Price Display */}
-                <div className="pt-1 pb-1">
-                  <div className="text-2xl sm:text-3xl font-extrabold text-white font-mono tracking-tight">
-                    {formatRupiah(pkg.price)}
+                {pkg.category === 'repair' ? (
+                  <div className="pt-1 pb-1">
+                    <div className="text-lg sm:text-xl font-bold text-amber-400 font-mono tracking-tight flex items-center gap-1.5">
+                      <AlertCircle className="w-4 h-4 text-amber-400" />
+                      <span>Belum Tersedia</span>
+                    </div>
+                    <span className="text-[11px] text-slate-400 font-mono">dalam tahap persiapan</span>
                   </div>
-                  <span className="text-[11px] text-slate-400 font-mono">per pasang sepatu</span>
-                </div>
+                ) : (
+                  <div className="pt-1 pb-1">
+                    <div className="text-2xl sm:text-3xl font-extrabold text-white font-mono tracking-tight">
+                      {formatRupiah(pkg.price)}
+                    </div>
+                    <span className="text-[11px] text-slate-400 font-mono">per pasang sepatu</span>
+                  </div>
+                )}
 
-                {/* Standardized description height for perfect vertical symmetry */}
-                <p className="text-xs text-slate-300 leading-relaxed font-sans min-h-[44px] line-clamp-2">
-                  {pkg.description}
-                </p>
+                {/* Standardized description / notice */}
+                {pkg.category === 'repair' ? (
+                  <div className="min-h-[44px] flex items-center">
+                    <p className="text-xs text-amber-300/90 font-mono bg-amber-500/10 border border-amber-500/20 p-2 rounded-xl w-full">
+                      ⚠️ (Kami belum menyediakan restorasi dan repair)
+                    </p>
+                  </div>
+                ) : (
+                  <p className="text-xs text-slate-300 leading-relaxed font-sans min-h-[44px] line-clamp-2">
+                    {pkg.description}
+                  </p>
+                )}
 
                 {/* Features List */}
                 <div className="pt-3.5 border-t border-slate-800/80 space-y-2.5 text-xs text-slate-300">
@@ -185,22 +220,29 @@ export const ServicesPricing: React.FC<ServicesPricingProps> = ({ settings }) =>
 
               {/* Booking WhatsApp CTA Button pinned at the exact bottom */}
               <div className="mt-auto pt-6">
-                <a
-                  href={getWhatsAppLink(
-                    currentOutlet.phone,
-                    `Halo Shoelabers Cabang ${currentOutlet.city}, saya ingin booking treatment ${pkg.name} seharga ${formatRupiah(pkg.price)} di outlet ${currentOutlet.city}. Apakah slot pengerjaan tersedia?`
-                  )}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`w-full py-3 px-4 rounded-xl font-bold text-xs flex items-center justify-center gap-2 transition-all shadow-md cursor-pointer ${
-                    pkg.isPopular
-                      ? 'bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white shadow-lg shadow-blue-600/30 ring-1 ring-blue-400/50 hover:scale-[1.01]'
-                      : 'bg-slate-800/90 hover:bg-slate-700 text-slate-100 border border-slate-700 hover:border-slate-600 hover:scale-[1.01]'
-                  }`}
-                >
-                  <MessageCircle className="w-4 h-4 text-emerald-400 flex-shrink-0" />
-                  <span>Chat Kasir ({currentOutlet.city})</span>
-                </a>
+                {pkg.category === 'repair' ? (
+                  <div className="w-full py-3 px-4 rounded-xl font-bold text-xs flex items-center justify-center gap-2 bg-slate-800/60 text-slate-400 border border-slate-700/60 cursor-not-allowed">
+                    <AlertCircle className="w-4 h-4 text-amber-400/80 flex-shrink-0" />
+                    <span>(Kami Belum Menyediakan Restorasi & Repair)</span>
+                  </div>
+                ) : (
+                  <a
+                    href={getWhatsAppLink(
+                      currentOutlet.phone,
+                      `Halo Shoelabers Cabang ${currentOutlet.city}, saya ingin booking treatment ${pkg.name} seharga ${formatRupiah(pkg.price)} di outlet ${currentOutlet.city}. Apakah slot pengerjaan tersedia?`
+                    )}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`w-full py-3 px-4 rounded-xl font-bold text-xs flex items-center justify-center gap-2 transition-all shadow-md cursor-pointer ${
+                      pkg.isPopular
+                        ? 'bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white shadow-lg shadow-blue-600/30 ring-1 ring-blue-400/50 hover:scale-[1.01]'
+                        : 'bg-slate-800/90 hover:bg-slate-700 text-slate-100 border border-slate-700 hover:border-slate-600 hover:scale-[1.01]'
+                    }`}
+                  >
+                    <MessageCircle className="w-4 h-4 text-emerald-400 flex-shrink-0" />
+                    <span>Chat Kasir ({currentOutlet.city})</span>
+                  </a>
+                )}
               </div>
             </SpotlightCard>
           ))}
