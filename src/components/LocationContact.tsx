@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MapPin, Clock, Instagram, MessageCircle, ExternalLink, Navigation, CheckCircle2 } from 'lucide-react';
+import { MapPin, Clock, Instagram, MessageCircle, ExternalLink, Navigation, CheckCircle2, Truck } from 'lucide-react';
 import { StoreSettings } from '../types';
 import { getWhatsAppLink } from '../services/supabase';
 import { SpotlightCard } from './ui/SpotlightCard';
@@ -185,9 +185,9 @@ export const LocationContact: React.FC<LocationContactProps> = ({ settings }) =>
                     <CheckCircle2 className="w-3 h-3 text-emerald-400" />
                     Drop-off di Outlet
                   </span>
-                  <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-slate-800/70 border border-slate-700/60">
+                  <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-slate-800/70 border border-slate-700/60 text-emerald-300 font-semibold">
                     <CheckCircle2 className="w-3 h-3 text-emerald-400" />
-                    Pick Up & Delivery
+                    FREE Pick-Up & Delivery
                   </span>
                   <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-slate-800/70 border border-slate-700/60">
                     <CheckCircle2 className="w-3 h-3 text-emerald-400" />
@@ -225,7 +225,7 @@ export const LocationContact: React.FC<LocationContactProps> = ({ settings }) =>
           ))}
         </div>
 
-        {/* Quick Additional Bar: Instagram & Web Nota Kasir Portal */}
+        {/* Quick Additional Bar: Instagram & Free Pick-Up Service */}
         <div className="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-4">
           <SpotlightCard
             spotlightColor="rgba(244, 63, 94, 0.15)"
@@ -244,7 +244,7 @@ export const LocationContact: React.FC<LocationContactProps> = ({ settings }) =>
               href={`https://instagram.com/${settings.instagram.replace('@', '')}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white text-xs font-mono font-semibold border border-slate-700 flex items-center gap-1"
+              className="px-3.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white text-xs font-mono font-semibold border border-slate-700 flex items-center gap-1 transition-colors"
             >
               <span>Follow</span>
               <ExternalLink className="w-3 h-3" />
@@ -252,26 +252,29 @@ export const LocationContact: React.FC<LocationContactProps> = ({ settings }) =>
           </SpotlightCard>
 
           <SpotlightCard
-            spotlightColor="rgba(59, 130, 246, 0.15)"
+            spotlightColor="rgba(16, 185, 129, 0.2)"
             className="p-5 rounded-2xl bg-slate-900/80 border border-slate-800 flex items-center justify-between"
           >
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-blue-500/15 border border-blue-500/30 flex items-center justify-center text-blue-400">
-                <ExternalLink className="w-5 h-5" />
+              <div className="w-10 h-10 rounded-xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
+                <Truck className="w-5 h-5" />
               </div>
               <div>
-                <div className="text-xs font-bold text-white">Portal Staf Kasir</div>
-                <div className="text-[11px] text-slate-400">Sistem Nota & Transaksi</div>
+                <div className="text-xs font-bold text-white">Layanan Free Pick-Up</div>
+                <div className="text-[11px] text-emerald-400 font-mono">Antar-Jemput Gratis (S&K)</div>
               </div>
             </div>
             <a
-              href="https://nota-shoelabers.vercel.app/"
+              href={getWhatsAppLink(
+                settings.storePhone,
+                'Halo Shoelabers! Saya ingin request layanan Free Pick-Up & Delivery untuk cuci sepatu saya.'
+              )}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-3 py-1.5 rounded-lg bg-blue-600/20 hover:bg-blue-600/30 text-blue-400 hover:text-blue-300 text-xs font-mono font-bold border border-blue-500/30 flex items-center gap-1"
+              className="px-3.5 py-1.5 rounded-lg bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 hover:text-white text-xs font-mono font-bold border border-emerald-500/30 flex items-center gap-1.5 transition-all shadow-sm"
             >
-              <span>Buka Portal</span>
-              <ExternalLink className="w-3 h-3" />
+              <MessageCircle className="w-3.5 h-3.5 text-emerald-400" />
+              <span>Request Pick-Up</span>
             </a>
           </SpotlightCard>
         </div>

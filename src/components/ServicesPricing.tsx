@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Sparkles, Check, Clock, MessageCircle, MapPin } from 'lucide-react';
+import { Sparkles, Check, Clock, MessageCircle, MapPin, Truck } from 'lucide-react';
 import { ServicePackage, StoreSettings } from '../types';
 import { fetchServicePackages, formatRupiah, getWhatsAppLink } from '../services/supabase';
 
@@ -174,6 +174,10 @@ export const ServicesPricing: React.FC<ServicesPricingProps> = ({ settings }) =>
                   </div>
                   <div className="flex items-center gap-2">
                     <Check className="w-3.5 h-3.5 text-emerald-400 flex-shrink-0" />
+                    <span className="text-emerald-300 font-medium">Melayani FREE Pick-Up & Delivery (S&K)</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Check className="w-3.5 h-3.5 text-emerald-400 flex-shrink-0" />
                     <span>100% Garansi cuci ulang jika kurang bersih</span>
                   </div>
                 </div>
@@ -200,6 +204,39 @@ export const ServicesPricing: React.FC<ServicesPricingProps> = ({ settings }) =>
               </div>
             </SpotlightCard>
           ))}
+        </div>
+
+        {/* Free Pick-Up & Delivery Highlight Banner */}
+        <div className="mt-12 p-6 rounded-3xl bg-gradient-to-r from-blue-950/90 via-[#0a1532] to-indigo-950/90 border border-blue-500/40 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="flex items-center gap-4 text-center md:text-left">
+            <div className="w-12 h-12 rounded-2xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-400 flex-shrink-0 mx-auto md:mx-0">
+              <Truck className="w-6 h-6 animate-pulse" />
+            </div>
+            <div>
+              <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-[10px] font-mono font-bold uppercase mb-1">
+                ★ LAYANAN ANTAR JEMPUT
+              </div>
+              <h3 className="text-base sm:text-xl font-bold text-white">
+                Melayani <span className="text-gradient-blue">FREE Pick-Up & Delivery</span> Langsung ke Rumah Anda
+              </h3>
+              <p className="text-xs text-slate-300 font-sans mt-0.5 max-w-2xl leading-relaxed">
+                Sibuk dan tidak sempat drop sepatu ke outlet? Tim teknisi Shoelabers siap menjemput dan mengantar kembali sepatu Anda untuk wilayah <strong className="text-blue-400">Surabaya & Gresik</strong> (Syarat & Ketentuan berlaku).
+              </p>
+            </div>
+          </div>
+
+          <a
+            href={getWhatsAppLink(
+              currentOutlet.phone,
+              `Halo Shoelabers Cabang ${currentOutlet.city}! Saya ingin pesan cuci sepatu dengan layanan FREE Pick-Up ke alamat saya.`
+            )}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-6 py-3 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold text-xs flex items-center gap-2 shadow-lg shadow-emerald-600/30 whitespace-nowrap hover:scale-[1.02] transition-transform flex-shrink-0 cursor-pointer"
+          >
+            <MessageCircle className="w-4 h-4 text-white" />
+            <span>Chat Kasir Request Free Pick-Up</span>
+          </a>
         </div>
 
       </div>

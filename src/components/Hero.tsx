@@ -56,8 +56,8 @@ export const Hero: React.FC<HeroProps> = ({ settings, onSearch }) => {
             {/* Subtitle */}
             <p className="text-sm sm:text-base text-slate-300 leading-relaxed max-w-2xl mx-auto lg:mx-0 font-sans">
               Treatment cuci sepatu profesional dengan formula pembersih premium ber-pH seimbang.
-              Aman untuk material mesh, canvas, suede, hingga kulit asli, serta dilengkapi
-              <strong className="text-blue-400 font-semibold"> sistem pelacakan status pengerjaan real-time</strong>.
+              Dilengkapi <strong className="text-emerald-400 font-semibold">layanan Free Pick-Up antar-jemput</strong>,
+              garansi cuci ulang, serta <strong className="text-blue-400 font-semibold">sistem pelacakan status real-time</strong>.
             </p>
 
             {/* Real-time Tracking Quick Search Bar */}
