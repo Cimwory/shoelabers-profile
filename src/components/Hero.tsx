@@ -61,7 +61,7 @@ export const Hero: React.FC<HeroProps> = ({ settings, onSearch }) => {
             </p>
 
             {/* Real-time Tracking Quick Search Bar */}
-            <div className="p-2 sm:p-2.5 rounded-2xl bg-[#0f172a]/95 border border-blue-900/60 shadow-2xl backdrop-blur-xl max-w-xl mx-auto lg:mx-0">
+            <div className="p-3 sm:p-3.5 rounded-3xl bg-[#0f172a]/95 border border-blue-900/60 shadow-2xl backdrop-blur-xl max-w-xl mx-auto lg:mx-0">
               <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-2">
                 <div className="relative flex-1">
                   <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
@@ -96,61 +96,61 @@ export const Hero: React.FC<HeroProps> = ({ settings, onSearch }) => {
             </div>
 
             {/* Trust Badges Row with React Bits SpotlightCard & CountUp */}
-            <div className="pt-3 grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-2xl mx-auto lg:mx-0 text-left">
+            <div className="pt-6 sm:pt-8 grid grid-cols-2 sm:grid-cols-4 gap-3.5 sm:gap-4.5 max-w-2xl sm:max-w-3xl mx-auto lg:mx-0 text-left">
               <SpotlightCard
-                spotlightColor="rgba(59, 130, 246, 0.25)"
-                className="p-3 rounded-2xl bg-slate-900/70 border border-slate-800/90"
+                spotlightColor="rgba(59, 130, 246, 0.3)"
+                className="p-4 sm:p-4.5 rounded-2xl sm:rounded-3xl bg-[#0b1328]/90 border border-slate-800/90 shadow-lg hover:border-blue-500/40 transition-colors"
               >
-                <div className="flex items-center gap-1.5 text-blue-400 font-bold text-xs mb-0.5">
+                <div className="flex items-center gap-1.5 text-blue-400 font-bold text-xs mb-1">
                   <Zap className="w-3.5 h-3.5" />
                   <span>One Day</span>
                 </div>
-                <div className="text-base font-extrabold text-white font-mono">
+                <div className="text-xl sm:text-2xl font-black text-white font-mono tracking-tight my-0.5">
                   <CountUp to={24} suffix=" Jam" />
                 </div>
-                <div className="text-[10px] text-slate-400">Layanan kilat</div>
+                <div className="text-[11px] text-slate-400 leading-tight">Layanan kilat 24 jam</div>
               </SpotlightCard>
 
               <SpotlightCard
-                spotlightColor="rgba(16, 185, 129, 0.25)"
-                className="p-3 rounded-2xl bg-slate-900/70 border border-slate-800/90"
+                spotlightColor="rgba(16, 185, 129, 0.3)"
+                className="p-4 sm:p-4.5 rounded-2xl sm:rounded-3xl bg-[#0b1328]/90 border border-slate-800/90 shadow-lg hover:border-emerald-500/40 transition-colors"
               >
-                <div className="flex items-center gap-1.5 text-emerald-400 font-bold text-xs mb-0.5">
+                <div className="flex items-center gap-1.5 text-emerald-400 font-bold text-xs mb-1">
                   <ShieldCheck className="w-3.5 h-3.5" />
                   <span>Garansi</span>
                 </div>
-                <div className="text-base font-extrabold text-white font-mono">
+                <div className="text-xl sm:text-2xl font-black text-white font-mono tracking-tight my-0.5">
                   <CountUp to={100} suffix="%" />
                 </div>
-                <div className="text-[10px] text-slate-400">Cuci ulang gratis</div>
+                <div className="text-[11px] text-slate-400 leading-tight">Cuci ulang gratis</div>
               </SpotlightCard>
 
               <SpotlightCard
-                spotlightColor="rgba(245, 158, 11, 0.25)"
-                className="p-3 rounded-2xl bg-slate-900/70 border border-slate-800/90"
+                spotlightColor="rgba(245, 158, 11, 0.3)"
+                className="p-4 sm:p-4.5 rounded-2xl sm:rounded-3xl bg-[#0b1328]/90 border border-slate-800/90 shadow-lg hover:border-amber-500/40 transition-colors"
               >
-                <div className="flex items-center gap-1.5 text-amber-400 font-bold text-xs mb-0.5">
+                <div className="flex items-center gap-1.5 text-amber-400 font-bold text-xs mb-1">
                   <Star className="w-3.5 h-3.5 fill-amber-400" />
                   <span>Rating</span>
                 </div>
-                <div className="text-base font-extrabold text-white font-mono">
+                <div className="text-xl sm:text-2xl font-black text-white font-mono tracking-tight my-0.5">
                   <CountUp to={5} prefix="4.9 / " />
                 </div>
-                <div className="text-[10px] text-slate-400">500+ Reviews</div>
+                <div className="text-[11px] text-slate-400 leading-tight">500+ Reviews</div>
               </SpotlightCard>
 
               <SpotlightCard
-                spotlightColor="rgba(168, 85, 247, 0.25)"
-                className="p-3 rounded-2xl bg-slate-900/70 border border-slate-800/90"
+                spotlightColor="rgba(168, 85, 247, 0.3)"
+                className="p-4 sm:p-4.5 rounded-2xl sm:rounded-3xl bg-[#0b1328]/90 border border-slate-800/90 shadow-lg hover:border-purple-500/40 transition-colors"
               >
-                <div className="flex items-center gap-1.5 text-purple-400 font-bold text-xs mb-0.5">
+                <div className="flex items-center gap-1.5 text-purple-400 font-bold text-xs mb-1">
                   <CheckCircle2 className="w-3.5 h-3.5" />
                   <span>Sneakers</span>
                 </div>
-                <div className="text-base font-extrabold text-white font-mono">
+                <div className="text-xl sm:text-2xl font-black text-white font-mono tracking-tight my-0.5">
                   <CountUp to={1500} suffix="+" />
                 </div>
-                <div className="text-[10px] text-slate-400">Telah tertangani</div>
+                <div className="text-[11px] text-slate-400 leading-tight">Telah tertangani</div>
               </SpotlightCard>
             </div>
           </div>
