@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import { Search, Sparkles, ShieldCheck, Zap, Star, ArrowRight, CheckCircle2 } from 'lucide-react';
 import { StoreSettings } from '../types';
+import { DecryptedText } from './ui/DecryptedText';
+import { ShinyText } from './ui/ShinyText';
+import { SpotlightCard } from './ui/SpotlightCard';
+import { CountUp } from './ui/CountUp';
 
 interface HeroProps {
   settings: StoreSettings;
@@ -28,25 +32,25 @@ export const Hero: React.FC<HeroProps> = ({ settings, onSearch }) => {
 
   return (
     <section id="beranda" className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden">
-      {/* Background Decorative Lighting */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-br from-blue-600/15 via-indigo-600/10 to-transparent rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute top-1/3 right-10 w-72 h-72 bg-cyan-500/10 rounded-full blur-2xl pointer-events-none" />
+      {/* Ambient Lighting */}
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-br from-blue-600/20 via-indigo-600/15 to-transparent rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           
           {/* Left Hero Column */}
           <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
-            {/* Tagline Pill */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-950/80 border border-blue-500/30 text-blue-300 text-xs font-mono shadow-sm">
-              <Sparkles className="w-3.5 h-3.5 text-blue-400" />
-              <span>PREMIUM SNEAKER CARE & RESTORATION</span>
+            {/* Tagline Pill with React Bits DecryptedText */}
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-950/80 border border-blue-500/40 text-blue-300 text-xs font-mono shadow-sm">
+              <Sparkles className="w-3.5 h-3.5 text-blue-400 animate-pulse" />
+              <DecryptedText text="PREMIUM SNEAKER CARE // SURABAYA" speed={35} />
             </div>
 
-            {/* Headline */}
+            {/* Headline with React Bits ShinyText */}
             <h1 className="text-3xl sm:text-5xl lg:text-6xl font-display font-extrabold tracking-tight text-white leading-[1.15]">
               Kembalikan Kilau &{' '}
-              <span className="text-gradient-blue">Kebersihan Sepatu</span> Kesayangan Anda.
+              <ShinyText text="Kebersihan Sepatu" shineColor="#93c5fd" className="text-gradient-blue" />{' '}
+              Kesayangan Anda.
             </h1>
 
             {/* Subtitle */}
@@ -57,7 +61,7 @@ export const Hero: React.FC<HeroProps> = ({ settings, onSearch }) => {
             </p>
 
             {/* Real-time Tracking Quick Search Bar */}
-            <div className="p-2 sm:p-2.5 rounded-2xl bg-[#0f172a]/90 border border-blue-900/50 shadow-2xl backdrop-blur-xl max-w-xl mx-auto lg:mx-0">
+            <div className="p-2 sm:p-2.5 rounded-2xl bg-[#0f172a]/95 border border-blue-900/60 shadow-2xl backdrop-blur-xl max-w-xl mx-auto lg:mx-0">
               <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-2">
                 <div className="relative flex-1">
                   <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
@@ -91,52 +95,75 @@ export const Hero: React.FC<HeroProps> = ({ settings, onSearch }) => {
               </div>
             </div>
 
-            {/* Trust Badges Row */}
+            {/* Trust Badges Row with React Bits SpotlightCard & CountUp */}
             <div className="pt-3 grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-2xl mx-auto lg:mx-0 text-left">
-              <div className="p-3 rounded-xl bg-slate-900/60 border border-slate-800/80">
+              <SpotlightCard
+                spotlightColor="rgba(59, 130, 246, 0.25)"
+                className="p-3 rounded-2xl bg-slate-900/70 border border-slate-800/90"
+              >
                 <div className="flex items-center gap-1.5 text-blue-400 font-bold text-xs mb-0.5">
                   <Zap className="w-3.5 h-3.5" />
-                  <span>One Day Service</span>
+                  <span>One Day</span>
                 </div>
-                <div className="text-[11px] text-slate-400">Layanan kilat 24 jam</div>
-              </div>
+                <div className="text-base font-extrabold text-white font-mono">
+                  <CountUp to={24} suffix=" Jam" />
+                </div>
+                <div className="text-[10px] text-slate-400">Layanan kilat</div>
+              </SpotlightCard>
 
-              <div className="p-3 rounded-xl bg-slate-900/60 border border-slate-800/80">
+              <SpotlightCard
+                spotlightColor="rgba(16, 185, 129, 0.25)"
+                className="p-3 rounded-2xl bg-slate-900/70 border border-slate-800/90"
+              >
                 <div className="flex items-center gap-1.5 text-emerald-400 font-bold text-xs mb-0.5">
                   <ShieldCheck className="w-3.5 h-3.5" />
-                  <span>100% Garansi</span>
+                  <span>Garansi</span>
                 </div>
-                <div className="text-[11px] text-slate-400">Cuci ulang jika belum puas</div>
-              </div>
+                <div className="text-base font-extrabold text-white font-mono">
+                  <CountUp to={100} suffix="%" />
+                </div>
+                <div className="text-[10px] text-slate-400">Cuci ulang gratis</div>
+              </SpotlightCard>
 
-              <div className="p-3 rounded-xl bg-slate-900/60 border border-slate-800/80">
+              <SpotlightCard
+                spotlightColor="rgba(245, 158, 11, 0.25)"
+                className="p-3 rounded-2xl bg-slate-900/70 border border-slate-800/90"
+              >
                 <div className="flex items-center gap-1.5 text-amber-400 font-bold text-xs mb-0.5">
                   <Star className="w-3.5 h-3.5 fill-amber-400" />
-                  <span>4.9 / 5.0</span>
+                  <span>Rating</span>
                 </div>
-                <div className="text-[11px] text-slate-400">500+ Sneakerheads</div>
-              </div>
+                <div className="text-base font-extrabold text-white font-mono">
+                  <CountUp to={5} prefix="4.9 / " />
+                </div>
+                <div className="text-[10px] text-slate-400">500+ Reviews</div>
+              </SpotlightCard>
 
-              <div className="p-3 rounded-xl bg-slate-900/60 border border-slate-800/80">
+              <SpotlightCard
+                spotlightColor="rgba(168, 85, 247, 0.25)"
+                className="p-3 rounded-2xl bg-slate-900/70 border border-slate-800/90"
+              >
                 <div className="flex items-center gap-1.5 text-purple-400 font-bold text-xs mb-0.5">
                   <CheckCircle2 className="w-3.5 h-3.5" />
-                  <span>Eco-Cleaner</span>
+                  <span>Sneakers</span>
                 </div>
-                <div className="text-[11px] text-slate-400">Aman untuk bahan sensitif</div>
-              </div>
+                <div className="text-base font-extrabold text-white font-mono">
+                  <CountUp to={1500} suffix="+" />
+                </div>
+                <div className="text-[10px] text-slate-400">Telah tertangani</div>
+              </SpotlightCard>
             </div>
           </div>
 
-          {/* Right Hero Column: Sneaker Visual & Live Card Showcase */}
+          {/* Right Hero Column: Sneaker Visual with React Bits SpotlightCard */}
           <div className="lg:col-span-5 relative flex justify-center">
             <div className="relative w-full max-w-md">
-              
-              {/* Glowing Background Ring */}
               <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/30 to-indigo-500/20 rounded-3xl blur-2xl -z-10" />
 
-              {/* Main Visual Card */}
-              <div className="relative rounded-3xl overflow-hidden bg-gradient-to-b from-[#0f1b36] to-[#0a1024] border border-blue-500/30 p-6 shadow-2xl space-y-5">
-                
+              <SpotlightCard
+                spotlightColor="rgba(59, 130, 246, 0.35)"
+                className="relative rounded-3xl overflow-hidden bg-gradient-to-b from-[#0f1b36] to-[#0a1024] border border-blue-500/40 p-6 shadow-2xl space-y-5"
+              >
                 <div className="flex items-center justify-between pb-3 border-b border-slate-800/80">
                   <div className="flex items-center gap-2">
                     <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping" />
@@ -149,7 +176,7 @@ export const Hero: React.FC<HeroProps> = ({ settings, onSearch }) => {
                   </span>
                 </div>
 
-                {/* Sneaker Preview Image (from real before/after assets) */}
+                {/* Sneaker Preview Image */}
                 <div className="relative h-56 rounded-2xl overflow-hidden bg-[#070b14] border border-slate-800 flex items-center justify-center group">
                   <img
                     src="/images/shoe_1_after_0.png"
@@ -171,7 +198,7 @@ export const Hero: React.FC<HeroProps> = ({ settings, onSearch }) => {
                   </div>
                 </div>
 
-                {/* Mini Stat Floating Badge */}
+                {/* Mini Stat */}
                 <div className="p-3.5 rounded-xl bg-slate-900/90 border border-slate-800 flex items-center justify-between text-xs">
                   <div>
                     <div className="text-slate-400 text-[10px]">Alamat Outlet</div>
@@ -184,7 +211,7 @@ export const Hero: React.FC<HeroProps> = ({ settings, onSearch }) => {
                     Buka Peta &rarr;
                   </a>
                 </div>
-              </div>
+              </SpotlightCard>
             </div>
           </div>
 

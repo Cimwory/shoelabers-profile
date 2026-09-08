@@ -8,17 +8,22 @@ import { Transaction, OrderStatus, StoreSettings } from '../types';
 import { searchTransaction, formatRupiah, formatDateTime, getWhatsAppLink } from '../services/supabase';
 import confetti from 'canvas-confetti';
 
+// React Bits UI Components
+import { SpotlightCard } from './ui/SpotlightCard';
+import { ShinyText } from './ui/ShinyText';
+import { DecryptedText } from './ui/DecryptedText';
+
 interface OrderTrackingProps {
   initialQuery?: string;
   settings: StoreSettings;
 }
 
 const STATUS_STEPS: { key: OrderStatus; label: string; desc: string }[] = [
-  { key: 'DITERIMA', label: '1. Diterima', desc: 'Sepatu masuk ke outlet & didata' },
-  { key: 'PENCUCIAN', label: '2. Pencucian', desc: 'Treatment & chemical deep clean' },
-  { key: 'PENGERINGAN', label: '3. Pengeringan', desc: 'Pengeringan mesin suhu khusus' },
-  { key: 'QUALITY_CHECK', label: '4. Quality Check', desc: 'Inspeksi detail & finishing wangi' },
-  { key: 'SELESAI', label: '5. Selesai', desc: 'Siap diambil atau diantar' },
+  { key: 'DITERIMA', label: '1. Diterima', desc: 'Sepatu masuk & didata teknisi' },
+  { key: 'PENCUCIAN', label: '2. Pencucian', desc: 'Treatment deep clean khusus' },
+  { key: 'PENGERINGAN', label: '3. Pengeringan', desc: 'Mesin suhu khusus anti-rusak' },
+  { key: 'QUALITY_CHECK', label: '4. Quality Check', desc: 'Inspeksi & finishing wangi' },
+  { key: 'SELESAI', label: '5. Selesai', desc: 'Siap diambil di outlet' },
 ];
 
 export const OrderTracking: React.FC<OrderTrackingProps> = ({ initialQuery = '', settings }) => {
@@ -51,8 +56,8 @@ export const OrderTracking: React.FC<OrderTrackingProps> = ({ initialQuery = '',
       setError(null);
       if (data.status === 'SELESAI') {
         confetti({
-          particleCount: 50,
-          spread: 60,
+          particleCount: 60,
+          spread: 70,
           origin: { y: 0.7 },
         });
       }
@@ -72,18 +77,18 @@ export const OrderTracking: React.FC<OrderTrackingProps> = ({ initialQuery = '',
   const currentStep = result ? getCurrentStepIndex(result.status) : 0;
 
   return (
-    <section id="tracking" className="py-20 bg-[#070c17] relative border-y border-slate-800/80">
+    <section id="tracking" className="py-20 bg-[#070c17]/90 relative border-y border-slate-800/80">
       
       {/* Background glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        {/* Section Header */}
+        {/* Section Header with React Bits DecryptedText */}
         <div className="text-center max-w-2xl mx-auto space-y-3 mb-10">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-950/80 border border-blue-500/40 text-blue-300 text-xs font-mono">
             <Search className="w-3.5 h-3.5 text-blue-400" />
-            <span>REAL-TIME SUPABASE CLOUD TRACKING</span>
+            <DecryptedText text="REAL-TIME CLOUD TRACKING // SUPABASE" speed={35} />
           </div>
           <h2 className="text-2xl sm:text-4xl font-display font-extrabold text-white tracking-tight">
             Lacak Status <span className="text-gradient-blue">Cucian Sepatu</span> Anda
@@ -136,7 +141,7 @@ export const OrderTracking: React.FC<OrderTrackingProps> = ({ initialQuery = '',
             </button>
           </form>
 
-          {/* Quick chip demo */}
+          {/* Quick demo chip */}
           <div className="flex items-center justify-between text-xs text-slate-400 pt-3 px-2 font-mono">
             <span>Coba cari contoh:</span>
             <button
@@ -144,7 +149,7 @@ export const OrderTracking: React.FC<OrderTrackingProps> = ({ initialQuery = '',
                 setQuery('SL-2026-228');
                 performSearch('SL-2026-228');
               }}
-              className="text-blue-400 hover:text-blue-300 underline cursor-pointer"
+              className="text-blue-400 hover:text-blue-300 underline cursor-pointer font-bold"
             >
               SL-2026-228 (Retta)
             </button>
@@ -162,10 +167,12 @@ export const OrderTracking: React.FC<OrderTrackingProps> = ({ initialQuery = '',
           </div>
         )}
 
-        {/* Tracking Result Card */}
+        {/* Tracking Result Card wrapped with React Bits SpotlightCard */}
         {result && (
-          <div className="rounded-3xl bg-[#0c1427] border border-blue-500/40 shadow-2xl overflow-hidden animate-fadeIn">
-            
+          <SpotlightCard
+            spotlightColor="rgba(59, 130, 246, 0.25)"
+            className="rounded-3xl bg-[#0c1427] border border-blue-500/40 shadow-2xl overflow-hidden animate-fadeIn"
+          >
             {/* Card Header */}
             <div className="p-5 sm:p-6 bg-gradient-to-r from-blue-950/80 via-slate-900/90 to-blue-950/80 border-b border-slate-800 flex flex-wrap items-center justify-between gap-4">
               <div>
@@ -180,7 +187,11 @@ export const OrderTracking: React.FC<OrderTrackingProps> = ({ initialQuery = '',
                         : 'bg-amber-500/20 text-amber-300 border border-amber-500/40'
                     }`}
                   >
-                    {result.status === 'SELESAI' ? '✨ SELESAI SIAP DIAMBIL' : '⚡ SEDANG DIKERJAKAN'}
+                    {result.status === 'SELESAI' ? (
+                      <ShinyText text="✨ SELESAI SIAP DIAMBIL" shineColor="#a7f3d0" />
+                    ) : (
+                      '⚡ SEDANG DIKERJAKAN'
+                    )}
                   </span>
                 </div>
                 <h3 className="text-lg sm:text-xl font-bold text-white">
@@ -214,7 +225,6 @@ export const OrderTracking: React.FC<OrderTrackingProps> = ({ initialQuery = '',
 
               {/* Steps Progress Bar */}
               <div className="relative">
-                {/* Connecting Line */}
                 <div className="hidden md:block absolute top-5 left-8 right-8 h-1 bg-slate-800 -z-0">
                   <div
                     className="h-full bg-gradient-to-r from-blue-500 to-emerald-500 transition-all duration-700"
@@ -263,7 +273,7 @@ export const OrderTracking: React.FC<OrderTrackingProps> = ({ initialQuery = '',
                 </div>
               </div>
 
-              {/* Status Note / Estimate */}
+              {/* Status Note */}
               <div className="mt-5 p-3.5 rounded-xl bg-blue-950/40 border border-blue-500/30 text-xs text-blue-200 flex items-center justify-between flex-wrap gap-2">
                 <div className="flex items-center gap-2">
                   <Calendar className="w-4 h-4 text-blue-400" />
@@ -398,8 +408,7 @@ export const OrderTracking: React.FC<OrderTrackingProps> = ({ initialQuery = '',
                 </a>
               </div>
             </div>
-
-          </div>
+          </SpotlightCard>
         )}
 
       </div>

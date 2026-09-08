@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Sparkles, MoveHorizontal, CheckCircle } from 'lucide-react';
+import { DecryptedText } from './ui/DecryptedText';
 
 interface ShowcaseItem {
   id: string;
@@ -50,11 +51,11 @@ export const BeforeAfterShowcase: React.FC = () => {
     <section id="portofolio" className="py-20 bg-[#080d1a] relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Header */}
+        {/* Header with React Bits DecryptedText */}
         <div className="text-center max-w-2xl mx-auto space-y-3 mb-12">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-950/80 border border-blue-500/30 text-blue-300 text-xs font-mono">
             <Sparkles className="w-3.5 h-3.5 text-blue-400" />
-            <span>BUKTI NYATA HASIL PENGERJAAN</span>
+            <DecryptedText text="TRANSFORMASI SEPATU // PROVEN RESULTS" speed={35} />
           </div>
           <h2 className="text-2xl sm:text-4xl font-display font-extrabold text-white tracking-tight">
             Portofolio & <span className="text-gradient-blue">Transformasi Sepatu</span>

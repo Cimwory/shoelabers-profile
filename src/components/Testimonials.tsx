@@ -1,5 +1,6 @@
 import React from 'react';
 import { Star, Quote } from 'lucide-react';
+import { SpotlightCard } from './ui/SpotlightCard';
 
 export const Testimonials: React.FC = () => {
   const reviews = [
@@ -41,11 +42,12 @@ export const Testimonials: React.FC = () => {
           </h2>
         </div>
 
-        {/* Reviews Grid */}
+        {/* Reviews Grid with SpotlightCard */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {reviews.map((r, idx) => (
-            <div
+            <SpotlightCard
               key={idx}
+              spotlightColor="rgba(59, 130, 246, 0.2)"
               className="p-6 rounded-3xl bg-slate-900/60 border border-slate-800 relative space-y-4 flex flex-col justify-between"
             >
               <div className="space-y-3">
@@ -72,7 +74,7 @@ export const Testimonials: React.FC = () => {
                   {r.shoe}
                 </span>
               </div>
-            </div>
+            </SpotlightCard>
           ))}
         </div>
 

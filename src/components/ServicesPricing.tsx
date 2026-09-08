@@ -3,6 +3,11 @@ import { Sparkles, Check, Clock, MessageCircle } from 'lucide-react';
 import { ServicePackage, StoreSettings } from '../types';
 import { fetchServicePackages, formatRupiah, getWhatsAppLink } from '../services/supabase';
 
+// React Bits UI Components
+import { SpotlightCard } from './ui/SpotlightCard';
+import { ShinyText } from './ui/ShinyText';
+import { DecryptedText } from './ui/DecryptedText';
+
 interface ServicesPricingProps {
   settings: StoreSettings;
 }
@@ -27,14 +32,14 @@ export const ServicesPricing: React.FC<ServicesPricingProps> = ({ settings }) =>
     : packages.filter((p) => p.category === activeCategory);
 
   return (
-    <section id="layanan" className="py-20 bg-[#070b16] relative border-b border-slate-800/80">
+    <section id="layanan" className="py-20 bg-[#070b16]/80 relative border-b border-slate-800/80">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Header */}
+        {/* Header with React Bits DecryptedText */}
         <div className="text-center max-w-2xl mx-auto space-y-3 mb-10">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-950/80 border border-blue-500/30 text-blue-300 text-xs font-mono">
             <Sparkles className="w-3.5 h-3.5 text-blue-400" />
-            <span>DAFTAR HARGA & MENU TREATMENT</span>
+            <DecryptedText text="DAFTAR HARGA & MENU // TRANSPARAN" speed={35} />
           </div>
           <h2 className="text-2xl sm:text-4xl font-display font-extrabold text-white tracking-tight">
             Layanan Terbaik untuk <span className="text-gradient-blue">Semua Jenis Sepatu</span>
@@ -61,21 +66,22 @@ export const ServicesPricing: React.FC<ServicesPricingProps> = ({ settings }) =>
           ))}
         </div>
 
-        {/* Pricing Cards Grid */}
+        {/* Pricing Cards Grid with React Bits SpotlightCard & ShinyText */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filtered.map((pkg) => (
-            <div
+            <SpotlightCard
               key={pkg.id}
+              spotlightColor={pkg.isPopular ? 'rgba(59, 130, 246, 0.35)' : 'rgba(59, 130, 246, 0.15)'}
               className={`relative rounded-3xl p-6 flex flex-col justify-between transition-all duration-300 hover:scale-[1.02] ${
                 pkg.isPopular
                   ? 'bg-gradient-to-b from-[#0f1d3d] to-[#0a1226] border-2 border-blue-500/70 shadow-2xl shadow-blue-600/20 ring-1 ring-blue-500/40'
-                  : 'bg-slate-900/60 border border-slate-800 hover:border-slate-700'
+                  : 'bg-slate-900/70 border border-slate-800 hover:border-slate-700'
               }`}
             >
-              {/* Popular Badge */}
+              {/* Popular Badge with ShinyText */}
               {pkg.isPopular && (
                 <div className="absolute -top-3 left-6 px-3 py-0.5 rounded-full bg-blue-500 text-white text-[10px] font-mono font-bold tracking-wider uppercase shadow-md">
-                  ★ PALING DIMINATI
+                  <ShinyText text="★ PALING DIMINATI" shineColor="#ffffff" />
                 </div>
               )}
 
@@ -144,7 +150,7 @@ export const ServicesPricing: React.FC<ServicesPricingProps> = ({ settings }) =>
                   <span>Pesan Treatment Ini</span>
                 </a>
               </div>
-            </div>
+            </SpotlightCard>
           ))}
         </div>
 

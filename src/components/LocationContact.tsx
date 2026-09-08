@@ -2,6 +2,8 @@ import React from 'react';
 import { MapPin, Clock, Phone, Instagram, MessageCircle, ExternalLink, Navigation } from 'lucide-react';
 import { StoreSettings } from '../types';
 import { getWhatsAppLink } from '../services/supabase';
+import { SpotlightCard } from './ui/SpotlightCard';
+import { DecryptedText } from './ui/DecryptedText';
 
 interface LocationContactProps {
   settings: StoreSettings;
@@ -9,7 +11,7 @@ interface LocationContactProps {
 
 export const LocationContact: React.FC<LocationContactProps> = ({ settings }) => {
   return (
-    <section id="lokasi" className="py-20 bg-[#070b16] relative">
+    <section id="lokasi" className="py-20 bg-[#070b16] relative pb-28 sm:pb-32">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
@@ -18,7 +20,7 @@ export const LocationContact: React.FC<LocationContactProps> = ({ settings }) =>
           <div className="lg:col-span-6 space-y-6">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-950/80 border border-blue-500/30 text-blue-300 text-xs font-mono">
               <MapPin className="w-3.5 h-3.5 text-blue-400" />
-              <span>OUTLET & WORKSHOP LOCATION</span>
+              <DecryptedText text="OUTLET & WORKSHOP // AMUNTAI NO 12" speed={35} />
             </div>
 
             <h2 className="text-2xl sm:text-4xl font-display font-extrabold text-white tracking-tight">
@@ -29,9 +31,12 @@ export const LocationContact: React.FC<LocationContactProps> = ({ settings }) =>
               Drop sepatu Anda langsung ke toko kami atau hubungi tim customer service untuk konsultasi kondisi sepatu, estimasi pengerjaan, dan request antar-jemput.
             </p>
 
-            {/* Info Items */}
+            {/* Info Items with SpotlightCard */}
             <div className="space-y-3 pt-2">
-              <div className="p-4 rounded-2xl bg-slate-900/80 border border-slate-800 flex items-start gap-3">
+              <SpotlightCard
+                spotlightColor="rgba(59, 130, 246, 0.2)"
+                className="p-4 rounded-2xl bg-slate-900/80 border border-slate-800 flex items-start gap-3"
+              >
                 <div className="w-9 h-9 rounded-xl bg-blue-600/20 text-blue-400 flex items-center justify-center flex-shrink-0 mt-0.5">
                   <MapPin className="w-5 h-5" />
                 </div>
@@ -40,9 +45,12 @@ export const LocationContact: React.FC<LocationContactProps> = ({ settings }) =>
                   <div className="text-sm font-bold text-white">{settings.storeAddress}</div>
                   <div className="text-xs text-slate-400 mt-0.5">Surabaya, Jawa Timur, Indonesia</div>
                 </div>
-              </div>
+              </SpotlightCard>
 
-              <div className="p-4 rounded-2xl bg-slate-900/80 border border-slate-800 flex items-start gap-3">
+              <SpotlightCard
+                spotlightColor="rgba(16, 185, 129, 0.2)"
+                className="p-4 rounded-2xl bg-slate-900/80 border border-slate-800 flex items-start gap-3"
+              >
                 <div className="w-9 h-9 rounded-xl bg-emerald-600/20 text-emerald-400 flex items-center justify-center flex-shrink-0 mt-0.5">
                   <Clock className="w-5 h-5" />
                 </div>
@@ -51,9 +59,12 @@ export const LocationContact: React.FC<LocationContactProps> = ({ settings }) =>
                   <div className="text-sm font-bold text-white">Senin — Minggu (09:00 - 21:00 WIB)</div>
                   <div className="text-xs text-emerald-400 mt-0.5">🟢 Buka Setiap Hari Tanpa Libur</div>
                 </div>
-              </div>
+              </SpotlightCard>
 
-              <div className="p-4 rounded-2xl bg-slate-900/80 border border-slate-800 flex items-start gap-3">
+              <SpotlightCard
+                spotlightColor="rgba(99, 102, 241, 0.2)"
+                className="p-4 rounded-2xl bg-slate-900/80 border border-slate-800 flex items-start gap-3"
+              >
                 <div className="w-9 h-9 rounded-xl bg-indigo-600/20 text-indigo-400 flex items-center justify-center flex-shrink-0 mt-0.5">
                   <Phone className="w-5 h-5" />
                 </div>
@@ -62,7 +73,7 @@ export const LocationContact: React.FC<LocationContactProps> = ({ settings }) =>
                   <div className="text-sm font-bold text-white font-mono">{settings.storePhone}</div>
                   <div className="text-xs text-slate-400 mt-0.5">Respon Cepat & Konsultasi Foto Sepatu</div>
                 </div>
-              </div>
+              </SpotlightCard>
             </div>
 
             {/* CTAs */}
@@ -91,8 +102,10 @@ export const LocationContact: React.FC<LocationContactProps> = ({ settings }) =>
 
           {/* Right Column: Visual Maps Card & Staff Portal */}
           <div className="lg:col-span-6">
-            <div className="rounded-3xl overflow-hidden bg-slate-900 border border-slate-800 shadow-2xl p-6 space-y-6">
-              
+            <SpotlightCard
+              spotlightColor="rgba(59, 130, 246, 0.3)"
+              className="rounded-3xl overflow-hidden bg-slate-900 border border-slate-800 shadow-2xl p-6 space-y-6"
+            >
               <div className="relative h-64 rounded-2xl overflow-hidden bg-gradient-to-br from-blue-950 via-[#0a1226] to-slate-950 border border-blue-900/40 p-6 flex flex-col justify-between">
                 <div className="flex items-center justify-between">
                   <span className="px-3 py-1 rounded-full text-xs font-mono font-bold bg-blue-500/20 text-blue-300 border border-blue-500/40">
@@ -134,8 +147,7 @@ export const LocationContact: React.FC<LocationContactProps> = ({ settings }) =>
                   <ExternalLink className="w-3.5 h-3.5" />
                 </a>
               </div>
-
-            </div>
+            </SpotlightCard>
           </div>
 
         </div>
