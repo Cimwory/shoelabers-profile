@@ -160,8 +160,8 @@ export const Hero: React.FC<HeroProps> = ({ settings, onSearch }) => {
                 {/* Sneaker Preview Image */}
                 <div className="relative h-56 rounded-2xl overflow-hidden bg-[#070b14] border border-slate-800 flex items-center justify-center group">
                   <img
-                    src="/images/shoe_1_after_0.png"
-                    alt="Pristine Sneaker Clean"
+                    src="/images/AFTER.jpg"
+                    alt="Hasil Deep Clean Shoelabers Nike Sneaker"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                     onError={(e) => {
                       (e.target as HTMLElement).style.display = 'none';
@@ -170,8 +170,8 @@ export const Hero: React.FC<HeroProps> = ({ settings, onSearch }) => {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20" />
                   <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between">
                     <div>
-                      <div className="text-xs font-bold text-white">Deep Clean & Unyellowing</div>
-                      <div className="text-[10px] font-mono text-emerald-400">Hasil Selesai • Siap Diambil</div>
+                      <div className="text-xs font-bold text-white">Deep Clean & Shape Maintain</div>
+                      <div className="text-[10px] font-mono text-emerald-400">Nike Suede & Mesh • Selesai Bersih</div>
                     </div>
                     <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">
                       100% Bersih
