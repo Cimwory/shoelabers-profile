@@ -86,7 +86,7 @@ export const Navbar: React.FC<NavbarProps> = ({ settings, onOpenTracking }) => {
         <div className="hidden sm:flex items-center gap-3">
           <button
             onClick={onOpenTracking}
-            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-blue-600/20 hover:bg-blue-600/30 border border-blue-500/40 text-blue-300 hover:text-white text-xs font-semibold transition-all shadow-sm hover:shadow-blue-500/20 cursor-pointer"
+            className="h-10 inline-flex items-center gap-2 px-4.5 py-2 rounded-xl bg-blue-600/20 hover:bg-blue-600/30 border border-blue-500/40 text-blue-300 hover:text-white text-xs font-bold transition-all shadow-sm hover:shadow-blue-500/20 cursor-pointer"
           >
             <Search className="w-3.5 h-3.5 text-blue-400" />
             <span>Lacak Pesanan</span>
@@ -99,9 +99,9 @@ export const Navbar: React.FC<NavbarProps> = ({ settings, onOpenTracking }) => {
             )}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-4.5 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white text-xs font-bold transition-all shadow-lg shadow-blue-600/25 hover:scale-[1.02]"
+            className="h-10 inline-flex items-center gap-2 px-4.5 py-2 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white text-xs font-bold transition-all shadow-lg shadow-blue-600/25 hover:scale-[1.02]"
           >
-            <MessageCircle className="w-3.5 h-3.5" />
+            <MessageCircle className="w-3.5 h-3.5 text-emerald-400" />
             <span>Chat WhatsApp</span>
           </a>
         </div>
@@ -154,10 +154,10 @@ export const Navbar: React.FC<NavbarProps> = ({ settings, onOpenTracking }) => {
               href={getWhatsAppLink(settings.storePhone, 'Halo Shoelabers, mau tanya cuci sepatu dong!')}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full py-2.5 rounded-xl bg-blue-600 text-white text-xs font-bold flex items-center justify-center gap-2 shadow-lg shadow-blue-600/30"
+              className="w-full py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-xs font-bold flex items-center justify-center gap-2 shadow-lg shadow-blue-600/30"
             >
-              <MessageCircle className="w-4 h-4" />
-              <span>WhatsApp Admin</span>
+              <MessageCircle className="w-4 h-4 text-emerald-400" />
+              <span>Chat WhatsApp Kasir</span>
             </a>
           </div>
         </div>

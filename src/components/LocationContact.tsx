@@ -1,5 +1,5 @@
 import React from 'react';
-import { MapPin, Clock, Phone, Instagram, MessageCircle, ExternalLink, Navigation } from 'lucide-react';
+import { MapPin, Clock, Instagram, MessageCircle, ExternalLink, Navigation } from 'lucide-react';
 import { StoreSettings } from '../types';
 import { getWhatsAppLink } from '../services/supabase';
 import { SpotlightCard } from './ui/SpotlightCard';
@@ -62,11 +62,11 @@ export const LocationContact: React.FC<LocationContactProps> = ({ settings }) =>
               </SpotlightCard>
 
               <SpotlightCard
-                spotlightColor="rgba(99, 102, 241, 0.2)"
+                spotlightColor="rgba(16, 185, 129, 0.2)"
                 className="p-4 rounded-2xl bg-slate-900/80 border border-slate-800 flex items-start gap-3"
               >
-                <div className="w-9 h-9 rounded-xl bg-indigo-600/20 text-indigo-400 flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <Phone className="w-5 h-5" />
+                <div className="w-9 h-9 rounded-xl bg-emerald-600/20 text-emerald-400 flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <MessageCircle className="w-5 h-5" />
                 </div>
                 <div>
                   <div className="text-xs text-slate-400 font-mono">WhatsApp Hotline</div>
@@ -82,9 +82,9 @@ export const LocationContact: React.FC<LocationContactProps> = ({ settings }) =>
                 href={getWhatsAppLink(settings.storePhone, 'Halo Shoelabers! Saya ingin konsultasi cuci sepatu.')}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-6 py-3 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold text-xs flex items-center gap-2 shadow-lg shadow-blue-600/30 hover:scale-[1.02] transition-transform"
+                className="px-6 py-3 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold text-xs flex items-center gap-2 shadow-lg shadow-blue-600/30 hover:scale-[1.02] transition-transform"
               >
-                <MessageCircle className="w-4 h-4" />
+                <MessageCircle className="w-4 h-4 text-emerald-400" />
                 <span>Chat WhatsApp Kasir</span>
               </a>
 
@@ -92,7 +92,7 @@ export const LocationContact: React.FC<LocationContactProps> = ({ settings }) =>
                 href={`https://maps.google.com/?q=${encodeURIComponent(settings.storeAddress + ' Surabaya')}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-5 py-3 rounded-xl bg-slate-900 border border-slate-700 text-slate-200 hover:text-white hover:border-slate-600 font-semibold text-xs flex items-center gap-2 transition-colors"
+                className="px-6 py-3 rounded-xl bg-slate-900 border border-slate-700 text-slate-200 hover:text-white hover:border-slate-600 font-bold text-xs flex items-center gap-2 transition-colors"
               >
                 <Navigation className="w-4 h-4 text-blue-400" />
                 <span>Buka Rute Google Maps</span>

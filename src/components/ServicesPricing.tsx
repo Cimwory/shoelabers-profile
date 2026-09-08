@@ -67,51 +67,58 @@ export const ServicesPricing: React.FC<ServicesPricingProps> = ({ settings }) =>
         </div>
 
         {/* Pricing Cards Grid with React Bits SpotlightCard & ShinyText */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pt-5 items-stretch">
           {filtered.map((pkg) => (
             <SpotlightCard
               key={pkg.id}
               spotlightColor={pkg.isPopular ? 'rgba(59, 130, 246, 0.35)' : 'rgba(59, 130, 246, 0.15)'}
-              className={`relative rounded-3xl p-6 flex flex-col justify-between transition-all duration-300 hover:scale-[1.02] ${
+              className={`rounded-3xl p-6 sm:p-7 flex flex-col transition-all duration-300 hover:scale-[1.02] ${
                 pkg.isPopular
-                  ? 'bg-gradient-to-b from-[#0f1d3d] to-[#0a1226] border-2 border-blue-500/70 shadow-2xl shadow-blue-600/20 ring-1 ring-blue-500/40'
-                  : 'bg-slate-900/70 border border-slate-800 hover:border-slate-700'
+                  ? 'bg-gradient-to-b from-[#0f1d3d] to-[#0a1226] border-2 border-blue-500 shadow-2xl shadow-blue-600/20 ring-1 ring-blue-500/40'
+                  : 'bg-slate-900/70 border border-slate-800 hover:border-slate-700 shadow-lg'
               }`}
+              innerClassName="flex flex-col h-full justify-between"
             >
-              {/* Popular Badge with ShinyText */}
+              {/* Symmetrical Centered Popular Badge with React Bits ShinyText */}
               {pkg.isPopular && (
-                <div className="absolute -top-3 left-6 px-3 py-0.5 rounded-full bg-blue-500 text-white text-[10px] font-mono font-bold tracking-wider uppercase shadow-md">
+                <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-600 border border-blue-400/80 text-white text-[10px] font-mono font-bold tracking-wider uppercase shadow-xl shadow-blue-600/40 flex items-center gap-1.5 whitespace-nowrap z-20">
+                  <Sparkles className="w-3.5 h-3.5 text-amber-300 fill-amber-300" />
                   <ShinyText text="★ PALING DIMINATI" shineColor="#ffffff" />
                 </div>
               )}
 
-              <div className="space-y-4">
-                <div className="flex items-start justify-between">
-                  <div>
-                    <span className="text-[10px] font-mono uppercase text-blue-400 font-semibold tracking-wider">
-                      {pkg.category}
-                    </span>
-                    <h3 className="text-lg font-bold text-white mt-0.5">{pkg.name}</h3>
-                  </div>
-                  <div className="flex items-center gap-1 text-[11px] font-mono text-slate-400 bg-slate-800/80 px-2 py-1 rounded-md">
-                    <Clock className="w-3 h-3 text-blue-400" />
+              <div className="space-y-4 flex-1 flex flex-col">
+                {/* Category & Duration Header */}
+                <div className="flex items-center justify-between gap-2">
+                  <span className="text-[10px] font-mono uppercase text-blue-400 font-bold tracking-wider px-2.5 py-0.5 rounded-md bg-blue-500/10 border border-blue-500/30">
+                    {pkg.category}
+                  </span>
+                  <div className="flex items-center gap-1.5 text-[11px] font-mono text-slate-400 bg-slate-800/80 px-2.5 py-1 rounded-md border border-slate-700/60 flex-shrink-0">
+                    <Clock className="w-3.5 h-3.5 text-blue-400" />
                     <span>{pkg.duration}</span>
                   </div>
                 </div>
 
-                <div className="pt-2">
-                  <div className="text-2xl sm:text-3xl font-extrabold text-white font-mono">
-                    {formatRupiah(pkg.price)}
-                  </div>
-                  <span className="text-[11px] text-slate-400">per pasang sepatu</span>
+                {/* Package Name */}
+                <div>
+                  <h3 className="text-xl font-bold text-white tracking-tight">{pkg.name}</h3>
                 </div>
 
-                <p className="text-xs text-slate-300 leading-relaxed font-sans pt-1">
+                {/* Price Display */}
+                <div className="pt-1 pb-1">
+                  <div className="text-2xl sm:text-3xl font-extrabold text-white font-mono tracking-tight">
+                    {formatRupiah(pkg.price)}
+                  </div>
+                  <span className="text-[11px] text-slate-400 font-mono">per pasang sepatu</span>
+                </div>
+
+                {/* Standardized description height for perfect vertical symmetry */}
+                <p className="text-xs text-slate-300 leading-relaxed font-sans min-h-[44px] line-clamp-2">
                   {pkg.description}
                 </p>
 
                 {/* Features List */}
-                <div className="pt-3 border-t border-slate-800/80 space-y-2 text-xs text-slate-300">
+                <div className="pt-3.5 border-t border-slate-800/80 space-y-2.5 text-xs text-slate-300">
                   <div className="flex items-center gap-2">
                     <Check className="w-3.5 h-3.5 text-emerald-400 flex-shrink-0" />
                     <span>Pembersihan bahan teliti & anti-luntur</span>
@@ -131,8 +138,8 @@ export const ServicesPricing: React.FC<ServicesPricingProps> = ({ settings }) =>
                 </div>
               </div>
 
-              {/* Booking CTA Button */}
-              <div className="pt-6">
+              {/* Booking WhatsApp CTA Button pinned at the exact bottom */}
+              <div className="mt-auto pt-6">
                 <a
                   href={getWhatsAppLink(
                     settings.storePhone,
@@ -140,14 +147,14 @@ export const ServicesPricing: React.FC<ServicesPricingProps> = ({ settings }) =>
                   )}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`w-full py-3 rounded-xl font-bold text-xs flex items-center justify-center gap-2 transition-all shadow-md ${
+                  className={`w-full py-3 px-4 rounded-xl font-bold text-xs flex items-center justify-center gap-2 transition-all shadow-md cursor-pointer ${
                     pkg.isPopular
-                      ? 'bg-blue-600 hover:bg-blue-500 text-white shadow-blue-600/30'
-                      : 'bg-slate-800 hover:bg-slate-700 text-slate-200'
+                      ? 'bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white shadow-lg shadow-blue-600/30 ring-1 ring-blue-400/50 hover:scale-[1.01]'
+                      : 'bg-slate-800/90 hover:bg-slate-700 text-slate-100 border border-slate-700 hover:border-slate-600 hover:scale-[1.01]'
                   }`}
                 >
-                  <MessageCircle className="w-4 h-4" />
-                  <span>Pesan Treatment Ini</span>
+                  <MessageCircle className="w-4 h-4 text-emerald-400 flex-shrink-0" />
+                  <span>Chat WhatsApp Kasir</span>
                 </a>
               </div>
             </SpotlightCard>
