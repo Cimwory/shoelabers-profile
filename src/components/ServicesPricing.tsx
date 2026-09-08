@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Sparkles, Check, Clock, MessageCircle } from 'lucide-react';
+import { Sparkles, Check, Clock, MessageCircle, MapPin } from 'lucide-react';
 import { ServicePackage, StoreSettings } from '../types';
 import { fetchServicePackages, formatRupiah, getWhatsAppLink } from '../services/supabase';
 
@@ -15,6 +15,18 @@ interface ServicesPricingProps {
 export const ServicesPricing: React.FC<ServicesPricingProps> = ({ settings }) => {
   const [packages, setPackages] = useState<ServicePackage[]>([]);
   const [activeCategory, setActiveCategory] = useState<'all' | 'cleaning' | 'treatment' | 'repair'>('all');
+  const [selectedOutletId, setSelectedOutletId] = useState<string>('surabaya');
+
+  const currentOutlet = settings.outlets?.find((o) => o.id === selectedOutletId) || settings.outlets?.[0] || {
+    id: 'surabaya',
+    city: 'Surabaya',
+    name: 'Outlet Surabaya (Keputih)',
+    address: 'City Home Regency D4 Keputih, Sukolilo, Surabaya',
+    phone: '081357859310',
+    formattedPhone: '+62 813-5785-9310',
+    hours: 'Senin — Minggu (09:00 - 21:00 WIB)',
+    mapsUrl: '',
+  };
 
   useEffect(() => {
     fetchServicePackages().then((data) => setPackages(data));
@@ -47,6 +59,35 @@ export const ServicesPricing: React.FC<ServicesPricingProps> = ({ settings }) =>
           <p className="text-xs sm:text-sm text-slate-300 font-sans">
             Harga transparan tanpa biaya tersembunyi. Setiap treatment menggunakan chemical khusus sesuai bahan sepatu Anda.
           </p>
+        </div>
+
+        {/* Branch Booking Outlet Selector */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-2 mb-5">
+          <span className="text-xs font-mono text-slate-400">Pilih Cabang Booking:</span>
+          <div className="inline-flex p-1 rounded-2xl bg-slate-900 border border-slate-800 shadow-inner">
+            <button
+              onClick={() => setSelectedOutletId('surabaya')}
+              className={`px-4 py-1.5 rounded-xl text-xs font-mono font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
+                selectedOutletId === 'surabaya'
+                  ? 'bg-blue-600 text-white shadow-md shadow-blue-600/40 border border-blue-400'
+                  : 'text-slate-400 hover:text-white'
+              }`}
+            >
+              <MapPin className="w-3.5 h-3.5 text-blue-400" />
+              <span>Surabaya (Sukolilo)</span>
+            </button>
+            <button
+              onClick={() => setSelectedOutletId('gresik')}
+              className={`px-4 py-1.5 rounded-xl text-xs font-mono font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
+                selectedOutletId === 'gresik'
+                  ? 'bg-blue-600 text-white shadow-md shadow-blue-600/40 border border-blue-400'
+                  : 'text-slate-400 hover:text-white'
+              }`}
+            >
+              <MapPin className="w-3.5 h-3.5 text-blue-400" />
+              <span>Gresik (Manyar)</span>
+            </button>
+          </div>
         </div>
 
         {/* Category Filter Tabs */}
@@ -142,8 +183,8 @@ export const ServicesPricing: React.FC<ServicesPricingProps> = ({ settings }) =>
               <div className="mt-auto pt-6">
                 <a
                   href={getWhatsAppLink(
-                    settings.storePhone,
-                    `Halo Shoelabers, saya ingin booking treatment ${pkg.name} seharga ${formatRupiah(pkg.price)}. Apakah slot pengerjaan tersedia?`
+                    currentOutlet.phone,
+                    `Halo Shoelabers Cabang ${currentOutlet.city}, saya ingin booking treatment ${pkg.name} seharga ${formatRupiah(pkg.price)} di outlet ${currentOutlet.city}. Apakah slot pengerjaan tersedia?`
                   )}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -154,7 +195,7 @@ export const ServicesPricing: React.FC<ServicesPricingProps> = ({ settings }) =>
                   }`}
                 >
                   <MessageCircle className="w-4 h-4 text-emerald-400 flex-shrink-0" />
-                  <span>Chat WhatsApp Kasir</span>
+                  <span>Chat Kasir ({currentOutlet.city})</span>
                 </a>
               </div>
             </SpotlightCard>

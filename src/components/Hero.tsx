@@ -43,7 +43,7 @@ export const Hero: React.FC<HeroProps> = ({ settings, onSearch }) => {
             {/* Tagline Pill with React Bits DecryptedText */}
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-950/80 border border-blue-500/40 text-blue-300 text-xs font-mono shadow-sm">
               <Sparkles className="w-3.5 h-3.5 text-blue-400 animate-pulse" />
-              <DecryptedText text="PREMIUM SNEAKER CARE // SURABAYA" speed={35} />
+              <DecryptedText text="PREMIUM SNEAKER CARE // SURABAYA & GRESIK" speed={35} />
             </div>
 
             {/* Headline with React Bits ShinyText */}
@@ -172,7 +172,7 @@ export const Hero: React.FC<HeroProps> = ({ settings, onSearch }) => {
                     </span>
                   </div>
                   <span className="text-[10px] font-mono text-slate-400 bg-slate-800/80 px-2 py-0.5 rounded">
-                    Surabaya Outlet
+                    2 Outlet: Surabaya & Gresik
                   </span>
                 </div>
 
@@ -198,18 +198,33 @@ export const Hero: React.FC<HeroProps> = ({ settings, onSearch }) => {
                   </div>
                 </div>
 
-                {/* Mini Stat */}
-                <div className="p-3.5 rounded-xl bg-slate-900/90 border border-slate-800 flex items-center justify-between text-xs">
-                  <div>
-                    <div className="text-slate-400 text-[10px]">Alamat Outlet</div>
-                    <div className="font-semibold text-slate-200">{settings.storeAddress}</div>
-                  </div>
-                  <a
-                    href="#lokasi"
-                    className="text-blue-400 hover:text-blue-300 font-mono text-[11px] underline font-bold"
-                  >
-                    Buka Peta &rarr;
-                  </a>
+                {/* 2 Outlets Mini Stat */}
+                <div className="p-3.5 rounded-xl bg-slate-900/90 border border-slate-800 space-y-2 text-xs">
+                  {settings.outlets?.map((outlet, idx) => (
+                    <div
+                      key={outlet.id}
+                      className={`flex items-center justify-between ${
+                        idx > 0 ? 'border-t border-slate-800/60 pt-2' : ''
+                      }`}
+                    >
+                      <div className="min-w-0 pr-2">
+                        <div className="text-slate-400 text-[10px] font-mono">
+                          Cabang {outlet.city}:
+                        </div>
+                        <div className="font-semibold text-slate-200 text-[11px] truncate">
+                          {outlet.address}
+                        </div>
+                      </div>
+                      <a
+                        href={outlet.mapsUrl || '#lokasi'}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-400 hover:text-blue-300 font-mono text-[11px] underline font-bold flex-shrink-0"
+                      >
+                        Peta &rarr;
+                      </a>
+                    </div>
+                  ))}
                 </div>
               </SpotlightCard>
             </div>

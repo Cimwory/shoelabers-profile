@@ -15,7 +15,7 @@ export const WhyUs: React.FC = () => {
     {
       icon: Smartphone,
       title: 'Transparansi Real-Time Tracking',
-      desc: 'Pertama dan terlengkap di Surabaya! Cek status pengerjaan sepatu dari HP Anda secara real-time. Tidak perlu repot bertanya berulang kali ke admin.',
+      desc: 'Pertama dan terlengkap di Surabaya & Gresik! Cek status pengerjaan sepatu dari HP Anda secara real-time. Tidak perlu repot bertanya berulang kali ke admin.',
       badge: 'Live Status Cloud',
       color: 'rgba(16, 185, 129, 0.25)',
     },

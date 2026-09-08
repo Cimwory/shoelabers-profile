@@ -59,7 +59,7 @@ export const Navbar: React.FC<NavbarProps> = ({ settings, onOpenTracking }) => {
             </div>
             <div className="font-mono text-[10px] text-emerald-400 flex items-center gap-1.5">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
-              <span>Buka Hari Ini (09:00 - 21:00 WIB)</span>
+              <span>Surabaya & Gresik • Buka 09:00 - 21:00</span>
             </div>
           </div>
         </a>

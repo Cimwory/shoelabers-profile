@@ -45,6 +45,18 @@ export interface ServicePackage {
   isPopular?: boolean;
 }
 
+export interface Outlet {
+  id: string;
+  city: string;
+  name: string;
+  address: string;
+  phone: string;
+  formattedPhone: string;
+  hours: string;
+  mapsUrl: string;
+  isPrimary?: boolean;
+}
+
 export interface StoreSettings {
   storeName: string;
   storePhone: string;
@@ -52,4 +64,5 @@ export interface StoreSettings {
   instagram: string;
   qrisUrl?: string;
   receiptFooterMessage: string;
+  outlets: Outlet[];
 }

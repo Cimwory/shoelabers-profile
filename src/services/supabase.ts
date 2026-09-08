@@ -1,5 +1,5 @@
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
-import { Transaction, ServicePackage, StoreSettings } from '../types';
+import { Transaction, ServicePackage, StoreSettings, Outlet } from '../types';
 
 export const SUPABASE_URL = 'https://tcjgqyytzpmicuribqok.supabase.co';
 export const SUPABASE_ANON_KEY = 'sb_publishable_mZr4c4JL4-15JtofSX6vQw_x5Gc6-aQ';
@@ -12,6 +12,32 @@ export const getSupabase = (): SupabaseClient => {
   }
   return supabaseClient;
 };
+
+// 2 Active Outlets (Surabaya & Gresik)
+export const DEFAULT_OUTLETS: Outlet[] = [
+  {
+    id: 'surabaya',
+    city: 'Surabaya',
+    name: 'Outlet Surabaya (Keputih)',
+    address: 'City Home Regency D4 Keputih, Sukolilo, Surabaya',
+    phone: '081357859310',
+    formattedPhone: '+62 813-5785-9310',
+    hours: 'Senin — Minggu (09:00 - 21:00 WIB)',
+    mapsUrl: 'https://maps.google.com/?q=' + encodeURIComponent('City Home Regency D4 Keputih, Sukolilo, Surabaya'),
+    isPrimary: true,
+  },
+  {
+    id: 'gresik',
+    city: 'Gresik',
+    name: 'Outlet Gresik (Manyar)',
+    address: 'Jl. Amuntai No.12, Ponganganrejo, Yosowilangun, Kec. Manyar, Kabupaten Gresik, Jawa Timur 61151',
+    phone: '081216242094',
+    formattedPhone: '+62 812-1624-2094',
+    hours: 'Senin — Minggu (09:00 - 21:00 WIB)',
+    mapsUrl: 'https://maps.google.com/?q=' + encodeURIComponent('Jl. Amuntai No.12, Ponganganrejo, Yosowilangun, Kec. Manyar, Kabupaten Gresik, Jawa Timur 61151'),
+    isPrimary: false,
+  },
+];
 
 // Fallback Preset Packages if offline
 export const DEFAULT_PACKAGES: ServicePackage[] = [
@@ -74,11 +100,12 @@ export const DEFAULT_PACKAGES: ServicePackage[] = [
 // Fallback Store Settings
 export const DEFAULT_STORE_SETTINGS: StoreSettings = {
   storeName: 'SHOELABERS SNEAKER CARE',
-  storePhone: '081216242094',
-  storeAddress: 'Jl. Amuntai No 12, Surabaya',
+  storePhone: '081357859310',
+  storeAddress: 'City Home Regency D4 Keputih, Sukolilo, Surabaya',
   instagram: '@shoelabers',
   qrisUrl: 'https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=00020101021126580014ID.LINKAJA.WWW01189360000201100000005204581253033605802ID5910SHOELABERS6008SURABAYA62070703A0163045A1A',
   receiptFooterMessage: 'Sepatu yang tidak diambil dalam 30 hari di luar tanggung jawab manajemen Shoelabers. Terima kasih atas kepercayaan Anda!',
+  outlets: DEFAULT_OUTLETS,
 };
 
 // Search Transaction by Number, Phone, or Name
@@ -212,6 +239,7 @@ export const fetchStoreSettings = async (): Promise<StoreSettings> => {
       instagram: data.instagram || DEFAULT_STORE_SETTINGS.instagram,
       qrisUrl: data.qris_url || DEFAULT_STORE_SETTINGS.qrisUrl,
       receiptFooterMessage: data.receipt_footer_message || DEFAULT_STORE_SETTINGS.receiptFooterMessage,
+      outlets: DEFAULT_OUTLETS,
     };
   } catch (err) {
     console.warn('Using default store settings', err);
