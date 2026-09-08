@@ -23,13 +23,6 @@ export const Hero: React.FC<HeroProps> = ({ settings, onSearch }) => {
     }
   };
 
-  const handleQuickDemo = (query: string) => {
-    setSearchInput(query);
-    onSearch(query);
-    const el = document.getElementById('tracking');
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
-  };
-
   return (
     <section id="beranda" className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden">
       {/* Ambient Lighting */}
@@ -69,7 +62,7 @@ export const Hero: React.FC<HeroProps> = ({ settings, onSearch }) => {
                     type="text"
                     value={searchInput}
                     onChange={(e) => setSearchInput(e.target.value)}
-                    placeholder="No. Nota (misal: SL-2026-228) atau No. HP..."
+                    placeholder="Masukkan No. Nota atau No. WhatsApp..."
                     className="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-900/90 border border-slate-800 text-white placeholder-slate-500 text-xs sm:text-sm focus:outline-none focus:border-blue-500 transition-colors font-mono"
                   />
                 </div>
@@ -81,18 +74,6 @@ export const Hero: React.FC<HeroProps> = ({ settings, onSearch }) => {
                   <ArrowRight className="w-4 h-4" />
                 </button>
               </form>
-
-              {/* Sample demo chip */}
-              <div className="flex items-center gap-2 pt-2 px-1 text-[11px] font-mono text-slate-400">
-                <span>💡 Coba cek nota aktif:</span>
-                <button
-                  type="button"
-                  onClick={() => handleQuickDemo('SL-2026-228')}
-                  className="text-blue-400 hover:text-blue-300 underline font-bold cursor-pointer"
-                >
-                  SL-2026-228 (Retta)
-                </button>
-              </div>
             </div>
 
             {/* Trust Badges Row with React Bits SpotlightCard & CountUp */}

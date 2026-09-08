@@ -108,7 +108,7 @@ export const OrderTracking: React.FC<OrderTrackingProps> = ({ initialQuery = '',
                 type="text"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                placeholder="Contoh: SL-2026-228 atau 08123456789..."
+                placeholder="Masukkan No. Nota atau No. WhatsApp..."
                 className="w-full pl-12 pr-4 py-3.5 rounded-2xl bg-[#0f172a] border border-blue-900/60 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-blue-500 font-mono shadow-xl transition-colors"
               />
               {query && (
@@ -140,20 +140,6 @@ export const OrderTracking: React.FC<OrderTrackingProps> = ({ initialQuery = '',
               )}
             </button>
           </form>
-
-          {/* Quick demo chip */}
-          <div className="flex items-center justify-between text-xs text-slate-400 pt-3 px-2 font-mono">
-            <span>Coba cari contoh:</span>
-            <button
-              onClick={() => {
-                setQuery('SL-2026-228');
-                performSearch('SL-2026-228');
-              }}
-              className="text-blue-400 hover:text-blue-300 underline cursor-pointer font-bold"
-            >
-              SL-2026-228 (Retta)
-            </button>
-          </div>
         </div>
 
         {/* Error Alert Box */}

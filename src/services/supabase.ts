@@ -1,8 +1,8 @@
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
 import { Transaction, ServicePackage, StoreSettings, Outlet } from '../types';
 
-export const SUPABASE_URL = 'https://tcjgqyytzpmicuribqok.supabase.co';
-export const SUPABASE_ANON_KEY = 'sb_publishable_mZr4c4JL4-15JtofSX6vQw_x5Gc6-aQ';
+export const SUPABASE_URL = (import.meta as any).env?.VITE_SUPABASE_URL || 'https://tcjgqyytzpmicuribqok.supabase.co';
+export const SUPABASE_ANON_KEY = (import.meta as any).env?.VITE_SUPABASE_ANON_KEY || 'sb_publishable_mZr4c4JL4-15JtofSX6vQw_x5Gc6-aQ';
 
 let supabaseClient: SupabaseClient | null = null;
 
